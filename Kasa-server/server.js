@@ -30,7 +30,11 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+   origin: [
+  "http://localhost:5173",
+  "https://kasa-luxe.com",
+  "https://www.kasa-luxe.com",
+],
     credentials: true,
   })
 );

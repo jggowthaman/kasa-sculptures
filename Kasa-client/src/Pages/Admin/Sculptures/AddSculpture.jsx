@@ -13,8 +13,8 @@ import {
 import AdminSidebar from "../../../Components/Admin/AdminSidebar";
 import AdminNavbar from "../../../Components/Admin/AdminNavbar";
 
-const API_URL = "http://localhost:5000/api/sculptures";
-const CATEGORY_API_URL = "http://localhost:5000/api/categories";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/sculptures`;
+const CATEGORY_API_URL = `${import.meta.env.VITE_API_URL}/api/categories`;
 
 const materials = [
   "Black Granite",

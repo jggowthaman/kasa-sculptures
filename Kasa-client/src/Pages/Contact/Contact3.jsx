@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const API_URL = "http://localhost:5000/api/enquiries";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/enquiries`;
 
 export default function Contact3() {
   const [formData, setFormData] = useState({

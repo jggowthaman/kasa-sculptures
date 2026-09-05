@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/sculptures";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/sculptures`;
 
 export default function Gallery3({ activeCategory }) {
   const [products, setProducts] = useState([]);
@@ -160,7 +160,7 @@ export default function Gallery3({ activeCategory }) {
       ? image.substring(1)
       : image;
 
-    return `http://localhost:5000/${cleanImage}`;
+   return `${import.meta.env.VITE_API_URL}/${cleanImage}`;
   };
 
   // =====================================================

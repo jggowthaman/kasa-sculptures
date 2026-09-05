@@ -6,14 +6,14 @@ import {
   HiOutlineTrash,
   HiOutlinePhotograph,
   HiOutlineX,
-  HiOutlineCheck,
+
 } from "react-icons/hi";
 
 import AdminSidebar from "../../../Components/Admin/AdminSidebar";
 import AdminNavbar from "../../../Components/Admin/AdminNavbar";
 
-const API_URL = "http://localhost:5000/api/services";
-const SERVER_URL = "http://localhost:5000";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/services`;
+const SERVER_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminServices() {
   const [sidebarOpen, setSidebarOpen] =

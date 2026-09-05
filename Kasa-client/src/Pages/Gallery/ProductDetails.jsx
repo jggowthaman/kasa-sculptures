@@ -14,9 +14,9 @@ import { FaWhatsapp } from "react-icons/fa";
 // API
 // =====================================================
 
-const API_URL = "http://localhost:5000/api/sculptures";
-const ENQUIRY_API = "http://localhost:5000/api/enquiries";
-const SERVER_URL = "http://localhost:5000";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/sculptures`;
+const ENQUIRY_API = `${import.meta.env.VITE_API_URL}/api/enquiries`;
+const SERVER_URL = import.meta.env.VITE_API_URL;
 
 // IMPORTANT:
 // Replace this with the client's actual WhatsApp number.

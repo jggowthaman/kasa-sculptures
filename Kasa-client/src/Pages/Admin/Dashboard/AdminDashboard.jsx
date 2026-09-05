@@ -17,7 +17,7 @@ import AdminSidebar from "../../../Components/Admin/AdminSidebar";
 import AdminNavbar from "../../../Components/Admin/AdminNavbar";
 
 const API_URL =
-  "http://localhost:5000/api/dashboard";
+  `${import.meta.env.VITE_API_URL}/api/dashboard`;
 
 export default function AdminDashboard() {
   const navigate = useNavigate();

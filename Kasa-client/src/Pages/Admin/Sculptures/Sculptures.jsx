@@ -16,7 +16,7 @@ import {
 import AdminSidebar from "../../../Components/Admin/AdminSidebar";
 import AdminNavbar from "../../../Components/Admin/AdminNavbar";
 
-const API_URL = "http://localhost:5000/api/sculptures";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/sculptures`;
 
 export default function Sculptures() {
   const navigate = useNavigate();
@@ -204,7 +204,7 @@ export default function Sculptures() {
       return image;
     }
 
-    return `http://localhost:5000/${image.replace(
+    return `${import.meta.env.VITE_API_URL}/${image.replace(
       /^\/+/,
       ""
     )}`;

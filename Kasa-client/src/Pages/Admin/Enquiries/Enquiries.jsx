@@ -18,7 +18,7 @@ import {
 import AdminSidebar from "../../../Components/Admin/AdminSidebar";
 import AdminNavbar from "../../../Components/Admin/AdminNavbar";
 
-const API_URL = "http://localhost:5000/api/enquiries";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/enquiries`;
 
 export default function Enquiries() {
   const [sidebarOpen, setSidebarOpen] =

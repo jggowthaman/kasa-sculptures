@@ -10,11 +10,10 @@ import {
 } from "react-icons/hi";
 
 const API_URL =
-  "http://localhost:5000/api/services";
+  `${import.meta.env.VITE_API_URL}/api/services`;
 
 const SERVER_URL =
-  "http://localhost:5000";
-
+  import.meta.env.VITE_API_URL;
 // =====================================================
 // ICONS
 // =====================================================

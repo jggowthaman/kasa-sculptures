@@ -640,7 +640,7 @@ export default function Footer() {
                   break-all
                 "
               >
-                kamatchiamman75@gmail.com
+                kasaluxeofficial@gmail.com
               </p>
             </div>
 

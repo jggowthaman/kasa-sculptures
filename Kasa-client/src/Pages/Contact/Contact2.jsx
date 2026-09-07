@@ -16,7 +16,7 @@ const contactInfo = [
   {
     icon: <HiOutlineMail />,
     title: "Email Address",
-    value: "kamatchiamman75@gmail.com",
+    value: "kasaluxeofficial@gmail.com",
     description: "Send us your project requirements anytime.",
   },
   {

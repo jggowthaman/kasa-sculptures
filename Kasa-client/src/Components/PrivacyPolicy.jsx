@@ -149,11 +149,11 @@ export default function PrivacyPolicy() {
 
               <p>📍 Mamallapuram, Tamil Nadu, India</p>
 
-              <p>📞 +91 XXXXXXXXXX</p>
+              <p>📞 +91 99406 76481 | +91 87544 64818</p>
 
-              <p>📧 info@kasaluxe.com</p>
+              <p>📧 kasaluxeofficial@gmail.com</p>
 
-              <p>💬 WhatsApp: +91 XXXXXXXXXX</p>
+              <p>💬 WhatsApp: +91 99406 76481 | +91 87544 64818</p>
 
             </div>
           </div>

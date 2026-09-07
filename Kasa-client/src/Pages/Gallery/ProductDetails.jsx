@@ -21,7 +21,7 @@ const SERVER_URL = import.meta.env.VITE_API_URL;
 // IMPORTANT:
 // Replace this with the client's actual WhatsApp number.
 // Country code required. Do not use + or spaces.
-const WHATSAPP_NUMBER = "919876543210";
+const WHATSAPP_NUMBER = "919940676481";
 
 // =====================================================
 // COMPONENT

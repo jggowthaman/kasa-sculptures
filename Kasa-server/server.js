@@ -25,19 +25,23 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // =====================================================
-// MIDDLEWARE
+// CORS
 // =====================================================
 
 app.use(
   cors({
-   origin: [
-  "http://localhost:5173",
-  "https://kasa-luxe.com",
-  "https://www.kasa-luxe.com",
-],
+    origin: [
+      "http://localhost:5173",
+      "https://kasa-luxe.com",
+      "https://www.kasa-luxe.com",
+    ],
     credentials: true,
   })
 );
+
+// =====================================================
+// BODY PARSERS
+// =====================================================
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -48,9 +52,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   "/uploads",
-  express.static(
-    path.join(__dirname, "uploads")
-  )
+  express.static(path.join(__dirname, "uploads"))
 );
 
 // =====================================================
@@ -70,30 +72,15 @@ app.get("/", (req, res) => {
 
 app.use("/api/admin", adminRoutes);
 
-app.use(
-  "/api/categories",
-  categoryRoutes
-);
+app.use("/api/categories", categoryRoutes);
 
-app.use(
-  "/api/sculptures",
-  sculptureRoutes
-);
+app.use("/api/sculptures", sculptureRoutes);
 
-app.use(
-  "/api/services",
-  serviceRoutes
-);
+app.use("/api/services", serviceRoutes);
 
-app.use(
-  "/api/enquiries",
-  enquiryRoutes
-);
+app.use("/api/enquiries", enquiryRoutes);
 
-app.use(
-  "/api/dashboard",
-  dashboardRoutes
-);
+app.use("/api/dashboard", dashboardRoutes);
 
 // =====================================================
 // 404 HANDLER
@@ -113,7 +100,19 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   console.error("SERVER ERROR:", err);
 
+  // Multer errors
   if (err.name === "MulterError") {
+    return res.status(400).json({
+      success: false,
+      message: err.message,
+    });
+  }
+
+  // File type validation errors
+  if (
+    err.message &&
+    err.message.includes("Only JPG")
+  ) {
     return res.status(400).json({
       success: false,
       message: err.message,
@@ -122,8 +121,7 @@ app.use((err, req, res, next) => {
 
   res.status(500).json({
     success: false,
-    message:
-      err.message || "Internal server error",
+    message: err.message || "Internal server error",
   });
 });
 
@@ -145,7 +143,19 @@ const startServer = async () => {
       );
 
       console.log(
+        `Categories API available at http://localhost:${PORT}/api/categories`
+      );
+
+      console.log(
+        `Sculptures API available at http://localhost:${PORT}/api/sculptures`
+      );
+
+      console.log(
         `Services API available at http://localhost:${PORT}/api/services`
+      );
+
+      console.log(
+        `Enquiries API available at http://localhost:${PORT}/api/enquiries`
       );
     });
   } catch (error) {

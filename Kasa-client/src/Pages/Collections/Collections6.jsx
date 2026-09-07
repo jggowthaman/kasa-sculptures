@@ -92,7 +92,7 @@ export default function Collections6() {
         >
 
           <a
-            href="https://wa.me/919876543210?text=Hello%20KASA%20LUXE,%20I%20would%20like%20to%20enquire%20about%20a%20custom%20stone%20sculpture."
+            href="https://wa.me/919940676481?text=Hello%20KASA%20LUXE,%20I%20would%20like%20to%20enquire%20about%20a%20custom%20stone%20sculpture."
             target="_blank"
             rel="noopener noreferrer"
             className="

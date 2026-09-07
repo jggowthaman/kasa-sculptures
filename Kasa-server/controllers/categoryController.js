@@ -1,16 +1,16 @@
 const { pool } = require("../config/db");
 
-// =====================================================
+// ======================================================
 // GET ALL CATEGORIES
-// =====================================================
-
+// ======================================================
 const getCategories = async (req, res) => {
   try {
     const [categories] = await pool.execute(
-      `SELECT 
+      `SELECT
         id,
         name,
         description,
+        image,
         status,
         created_at,
         updated_at
@@ -23,28 +23,33 @@ const getCategories = async (req, res) => {
       categories,
     });
   } catch (error) {
-    console.error("Get Categories Error:", error);
+    console.error("========== GET CATEGORIES ERROR ==========");
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
+    console.error("SQL State:", error.sqlState);
+    console.error("Stack:", error.stack);
+    console.error("===========================================");
 
     res.status(500).json({
       success: false,
-      message: "Failed to fetch categories.",
+      message: error.message || "Failed to fetch categories.",
     });
   }
 };
 
-// =====================================================
-// GET SINGLE CATEGORY
-// =====================================================
-
+// ======================================================
+// GET CATEGORY BY ID
+// ======================================================
 const getCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
 
     const [categories] = await pool.execute(
-      `SELECT 
+      `SELECT
         id,
         name,
         description,
+        image,
         status,
         created_at,
         updated_at
@@ -65,23 +70,28 @@ const getCategoryById = async (req, res) => {
       category: categories[0],
     });
   } catch (error) {
-    console.error("Get Category Error:", error);
+    console.error("========== GET CATEGORY ERROR ==========");
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
+    console.error("SQL State:", error.sqlState);
+    console.error("Stack:", error.stack);
+    console.error("=========================================");
 
     res.status(500).json({
       success: false,
-      message: "Failed to fetch category.",
+      message: error.message || "Failed to fetch category.",
     });
   }
 };
 
-// =====================================================
+// ======================================================
 // CREATE CATEGORY
-// =====================================================
-
+// ======================================================
 const createCategory = async (req, res) => {
   try {
     const { name, description, status } = req.body;
 
+    // Check category name
     if (!name || !name.trim()) {
       return res.status(400).json({
         success: false,
@@ -91,7 +101,7 @@ const createCategory = async (req, res) => {
 
     const categoryName = name.trim();
 
-    // Check duplicate
+    // Check duplicate category
     const [existingCategory] = await pool.execute(
       `SELECT id
        FROM categories
@@ -106,22 +116,46 @@ const createCategory = async (req, res) => {
       });
     }
 
+    // Only allow Active / Inactive
     const categoryStatus =
       status === "Inactive" ? "Inactive" : "Active";
 
+    // Image path
+    const image = req.file
+      ? `uploads/categories/${req.file.filename}`
+      : null;
+
+    console.log("========== CREATE CATEGORY ==========");
+    console.log("Name:", categoryName);
+    console.log("Description:", description);
+    console.log("Status:", categoryStatus);
+    console.log("File:", req.file);
+    console.log("Image:", image);
+    console.log("====================================");
+
+    // Insert category
     const [result] = await pool.execute(
       `INSERT INTO categories
-       (name, description, status)
-       VALUES (?, ?, ?)`,
+       (name, description, image, status)
+       VALUES (?, ?, ?, ?)`,
       [
         categoryName,
         description?.trim() || null,
+        image,
         categoryStatus,
       ]
     );
 
+    // Get newly created category
     const [newCategory] = await pool.execute(
-      `SELECT *
+      `SELECT
+        id,
+        name,
+        description,
+        image,
+        status,
+        created_at,
+        updated_at
        FROM categories
        WHERE id = ?`,
       [result.insertId]
@@ -133,24 +167,34 @@ const createCategory = async (req, res) => {
       category: newCategory[0],
     });
   } catch (error) {
-    console.error("Create Category Error:", error);
+    console.error("========== CREATE CATEGORY ERROR ==========");
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
+    console.error("SQL State:", error.sqlState);
+    console.error("Stack:", error.stack);
+    console.error("============================================");
 
     res.status(500).json({
       success: false,
-      message: "Failed to create category.",
+      message: error.message || "Failed to create category.",
     });
   }
 };
 
-// =====================================================
+// ======================================================
 // UPDATE CATEGORY
-// =====================================================
-
+// ======================================================
 const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description, status } = req.body;
 
+    console.log("========== UPDATE CATEGORY ==========");
+    console.log("Category ID:", id);
+    console.log("Request Body:", req.body);
+    console.log("Uploaded File:", req.file);
+
+    // Check category name
     if (!name || !name.trim()) {
       return res.status(400).json({
         success: false,
@@ -160,9 +204,12 @@ const updateCategory = async (req, res) => {
 
     const categoryName = name.trim();
 
-    // Check category exists
+    // Get existing category
     const [existingCategory] = await pool.execute(
-      `SELECT id
+      `SELECT
+        id,
+        name,
+        image
        FROM categories
        WHERE id = ?`,
       [id]
@@ -191,29 +238,60 @@ const updateCategory = async (req, res) => {
       });
     }
 
+    // Status
     const categoryStatus =
       status === "Inactive" ? "Inactive" : "Active";
 
-    await pool.execute(
+    // Keep old image if no new image is selected
+    let image = existingCategory[0].image || null;
+
+    // If new image uploaded, replace old image path
+    if (req.file) {
+      image = `uploads/categories/${req.file.filename}`;
+    }
+
+    console.log("Category Name:", categoryName);
+    console.log("Description:", description);
+    console.log("Status:", categoryStatus);
+    console.log("Final Image:", image);
+
+    // Update category
+    const [result] = await pool.execute(
       `UPDATE categories
-       SET name = ?,
-           description = ?,
-           status = ?
+       SET
+        name = ?,
+        description = ?,
+        image = ?,
+        status = ?
        WHERE id = ?`,
       [
         categoryName,
         description?.trim() || null,
+        image,
         categoryStatus,
         id,
       ]
     );
 
+    console.log("UPDATE RESULT:", result);
+
+    // Get updated category
     const [updatedCategory] = await pool.execute(
-      `SELECT *
+      `SELECT
+        id,
+        name,
+        description,
+        image,
+        status,
+        created_at,
+        updated_at
        FROM categories
        WHERE id = ?`,
       [id]
     );
+
+    console.log("UPDATED CATEGORY:", updatedCategory[0]);
+    console.log("====================================");
 
     res.status(200).json({
       success: true,
@@ -221,26 +299,34 @@ const updateCategory = async (req, res) => {
       category: updatedCategory[0],
     });
   } catch (error) {
-    console.error("Update Category Error:", error);
+    // IMPORTANT:
+    // This prints the REAL database/server error
+    console.error("========== UPDATE CATEGORY ERROR ==========");
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
+    console.error("SQL State:", error.sqlState);
+    console.error("Stack:", error.stack);
+    console.error("============================================");
 
     res.status(500).json({
       success: false,
-      message: "Failed to update category.",
+      message: error.message || "Failed to update category.",
     });
   }
 };
 
-// =====================================================
+// ======================================================
 // DELETE CATEGORY
-// =====================================================
-
+// ======================================================
 const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
 
     // Check category exists
     const [category] = await pool.execute(
-      `SELECT id, name
+      `SELECT
+        id,
+        name
        FROM categories
        WHERE id = ?`,
       [id]
@@ -253,7 +339,7 @@ const deleteCategory = async (req, res) => {
       });
     }
 
-    // Check whether sculptures are using this category
+    // Check sculptures using this category
     const [sculptures] = await pool.execute(
       `SELECT COUNT(*) AS count
        FROM sculptures
@@ -270,6 +356,7 @@ const deleteCategory = async (req, res) => {
       });
     }
 
+    // Delete category
     await pool.execute(
       `DELETE FROM categories
        WHERE id = ?`,
@@ -281,19 +368,23 @@ const deleteCategory = async (req, res) => {
       message: "Category deleted successfully.",
     });
   } catch (error) {
-    console.error("Delete Category Error:", error);
+    console.error("========== DELETE CATEGORY ERROR ==========");
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
+    console.error("SQL State:", error.sqlState);
+    console.error("Stack:", error.stack);
+    console.error("============================================");
 
     res.status(500).json({
       success: false,
-      message: "Failed to delete category.",
+      message: error.message || "Failed to delete category.",
     });
   }
 };
 
-// =====================================================
+// ======================================================
 // EXPORT
-// =====================================================
-
+// ======================================================
 module.exports = {
   getCategories,
   getCategoryById,

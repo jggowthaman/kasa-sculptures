@@ -3,74 +3,70 @@ require("dotenv").config();
 
 const { pool } = require("./config/db");
 
-const createOrUpdateAdmin = async () => {
+const updateAdmin = async () => {
   try {
     // ==========================================
-    // EXISTING ADMIN EMAIL IN DATABASE
+    // CLIENT'S ONLY LOGIN
     // ==========================================
-    const oldEmail = "admin@kasaluxe.com";
+    const email = "kasaluxeofficial@gmail.com";
+    const password = "KASA@5175";
 
-    // ==========================================
-    // CLIENT'S NEW LOGIN DETAILS
-    // ==========================================
-    const newEmail = "kasaluxeofficial@gmail.com";
-    const newPassword = "KASA@5175";
+    console.log("=================================");
+    console.log("Database:", process.env.DB_NAME);
+    console.log("Updating admin login...");
 
-    // Hash new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Check existing admin
-    const [existingAdmin] = await pool.execute(
-      "SELECT id FROM admins WHERE email = ?",
-      [oldEmail]
+    // Get the existing admin
+    const [admins] = await pool.execute(
+      "SELECT id FROM admins LIMIT 1"
     );
 
-    // ==========================================
-    // UPDATE EXISTING ADMIN
-    // ==========================================
-    if (existingAdmin.length > 0) {
-      const adminId = existingAdmin[0].id;
+    if (admins.length === 0) {
+      // No admin exists → create one
+      await pool.execute(
+        `INSERT INTO admins (email, password)
+         VALUES (?, ?)`,
+        [email, hashedPassword]
+      );
 
+      console.log("Admin created successfully.");
+    } else {
+      // Admin exists → replace email + password
       await pool.execute(
         `UPDATE admins
          SET email = ?,
              password = ?
          WHERE id = ?`,
-        [newEmail, hashedPassword, adminId]
+        [
+          email,
+          hashedPassword,
+          admins[0].id,
+        ]
       );
 
-      console.log("=================================");
       console.log("Admin updated successfully.");
-      console.log("Admin ID:", adminId);
-      console.log("New Email:", newEmail);
-      console.log("=================================");
-
-      process.exit(0);
     }
 
-    // ==========================================
-    // CREATE NEW ADMIN IF OLD ADMIN NOT FOUND
-    // ==========================================
-    await pool.execute(
-      `INSERT INTO admins (email, password)
-       VALUES (?, ?)`,
-      [newEmail, hashedPassword]
-    );
-
     console.log("=================================");
-    console.log("New admin created successfully.");
-    console.log("Email:", newEmail);
+    console.log("Email:", email);
+    console.log("Admin login is ready.");
     console.log("=================================");
 
+    await pool.end();
     process.exit(0);
+
   } catch (error) {
     console.error("=================================");
-    console.error("Admin update/create error:");
-    console.error(error.message);
+    console.error("ADMIN ERROR");
+    console.error("Message:", error.message);
+    console.error("Code:", error.code);
     console.error("=================================");
 
+    await pool.end();
     process.exit(1);
   }
 };
 
-createOrUpdateAdmin();
+updateAdmin();

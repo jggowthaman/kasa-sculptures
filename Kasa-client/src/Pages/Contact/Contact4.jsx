@@ -45,16 +45,16 @@ export default function Contact4() {
   className="rounded-2xl overflow-hidden shadow-2xl border border-[#E6DCCB]"
 >
 
-  <iframe
-    title="KASA LUXE Location"
-    src="https://www.google.com/maps?q=J55P%2BGGQ%2C+First+street%2C+East+Coast+Rd%2C+Mariyappan+Thottam%2C+Kalpakkam%2C+Mahabalipuram%2C+Tamil+Nadu&z=14&t=m&hl=en&output=embed"
-    width="100%"
-    height="650"
-    loading="lazy"
-    allowFullScreen
-    referrerPolicy="no-referrer-when-downgrade"
-    className="w-full h-[450px] md:h-[550px] lg:h-[650px] border-0"
-  ></iframe>
+<iframe
+  title="KASA LUXE Location"
+  src="https://www.google.com/maps?q=Kamatchi+Amman+Sculptures+%26+Architects,+First+Street,+East+Coast+Road,+Mariyappan+Thottam,+Kalpakkam,+Mahabalipuram,+Tamil+Nadu+603104,+India&z=14&t=m&hl=en&output=embed"
+  width="100%"
+  height="650"
+  loading="lazy"
+  allowFullScreen
+  referrerPolicy="no-referrer-when-downgrade"
+  className="w-full h-[450px] md:h-[550px] lg:h-[650px] border-0"
+></iframe>
 
  
 

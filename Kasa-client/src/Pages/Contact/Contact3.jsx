@@ -173,7 +173,7 @@ export default function Contact3() {
       // =================================================
 
       const phoneNumber =
-        "919944817224";
+        "919940676481";
 
       const whatsappMessage = `
 Hello KASA LUXE,

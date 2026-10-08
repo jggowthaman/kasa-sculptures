@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-import project1 from "../../assets/img1.jpg";
-import project2 from "../../assets/img2.jpg";
-import project3 from "../../assets/img3.jpg";
-import project4 from "../../assets/img4.jpg";
-import project5 from "../../assets/kasa logo.jpeg";
-import project6 from "../../assets/img1.jpg";
+import project1 from "../../assets/t13.jpeg";
+import project2 from "../../assets/v1.png";
+import project3 from "../../assets/t10.jpeg";
+
 
 const projects = [
   {
@@ -15,24 +13,13 @@ const projects = [
   },
   {
     image: project2,
-    title: "Granite Ganesha",
+    title: "Vinayakar",
   },
   {
     image: project3,
     title: "Temple Pillars",
   },
-  {
-    image: project4,
-    title: "Stone Architecture",
-  },
-  {
-    image: project5,
-    title: "Custom Sculpture",
-  },
-  {
-    image: project6,
-    title: "Heritage Restoration",
-  },
+
 ];
 
 export default function Home5() {

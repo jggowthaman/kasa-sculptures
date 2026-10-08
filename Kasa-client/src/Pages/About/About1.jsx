@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-import aboutImg from "../../assets/img1.jpg";
+import aboutImg from "../../assets/c6.jpeg";
 
 export default function About1() {
   return (
@@ -25,7 +25,7 @@ export default function About1() {
 
       <div className="absolute inset-0 bg-black/65"></div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/50 to-black/30"></div>
 
       {/* Content */}
 
@@ -52,7 +52,7 @@ font-medium
 my-4
 "
           >
-            About KASA LUXE
+            The Story of a Sthapathi
           </motion.p>
 
           {/* Heading */}
@@ -70,18 +70,18 @@ text-5xl
 sm:text-6xl
 md:text-7xl
 lg:text-[88px]
-xl:text-[100px]
+xl:text-[50px]
 leading-[1.05]
 font-semibold
 tracking-tight
 text-white
 "
           >
-            Crafting Timeless
+            My Guru. My Hero. My Father.
             <br />
 
             <span className="text-[#C89A3D]">
-              Stone Heritage
+              He learned by doing.
             </span>
 
           </motion.h1>
@@ -102,17 +102,16 @@ italic
 text-xl
 sm:text-2xl
 md:text-[28px]
-lg:text-[32px]
+lg:text-[30px]
 leading-relaxed
 tracking-wide
 text-[#E9E3D7]
 max-w-3xl
 "
           >
-            For over three decades, KASA LUXE has preserved
-            India's rich sculptural heritage through handcrafted
-            granite sculptures, temple architecture, and bespoke
-            stone creations admired across generations.
+            It began with my father.
+            <br />
+            My father, S. K. Chinnaiya, was born in 1947. He was a sculptor who learned the craft through his own will, observation, patience and experience. In those days, the knowledge of sculpting was not something one could simply find in books or learn from a classroom as easily as we can today.
           </motion.p>
 
           {/* Buttons */}

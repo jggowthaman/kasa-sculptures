@@ -4,7 +4,7 @@ import About3 from "./About3";
 import About4 from "./About4";
 import About5 from "./About5";
 import About6 from "./About6";
-import About7 from "./About7";
+
 import About8 from "./About8";
 
 export default function About() {
@@ -23,7 +23,7 @@ export default function About() {
 
       <About6 />
 
-      <About7 />
+  
 
       <About8 />
 

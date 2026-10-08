@@ -7,15 +7,15 @@ import {
 const values = [
   {
     icon: HiOutlineEye,
-    title: "Our Vision",
+    title: "A Legacy in Stone",
     description:
-      "To preserve India's timeless sculptural heritage by creating world-class stone masterpieces that inspire generations and become enduring symbols of culture, devotion, and architectural excellence.",
+      "When I think about my life, I do not think only about the sculptures we have created.I think about my father.I think about the little boy I once was, standing beside him and learning without even realising it.",
   },
   {
     icon: HiOutlineLightBulb,
-    title: "Our Mission",
+    title: "The Next Generation",
     description:
-      "To deliver handcrafted granite sculptures and temple architecture with uncompromising quality, artistic precision, and traditional craftsmanship while exceeding every client's expectations.",
+      "There is one part of this journey that makes me especially proud. My son, Gowthaman Sampath, is now carrying forward the legacy that my father once passed to me.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function About3() {
         >
 
           <p className="font-['Outfit'] uppercase tracking-[6px] text-[#B58A4A] text-lg mb-5">
-            Our Values
+            Beyond borders.
           </p>
 
           <h2 className="font-['Cormorant_Garamond'] text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-tight mb-8">
@@ -49,8 +49,7 @@ export default function About3() {
           </h2>
 
           <p className="font-['Cormorant_Garamond'] italic text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Every masterpiece begins with a vision, guided by tradition,
-            perfected through dedication, and delivered with timeless quality.
+            Our sculptures have now travelled to places including Malaysia, Singapore, Mauritius, Finland, Germany, Toronto, Tokyo, Montreal, Australia, South Africa, and many other parts of the world.
           </p>
 
         </motion.div>

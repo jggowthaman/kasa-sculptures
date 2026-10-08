@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import gallery1 from "../../assets/perumal.png";
 import gallery2 from "../../assets/narasimmar.png";
 import gallery3 from "../../assets/varaagi.png";
-import gallery4 from "../../assets/vinayakar face.png";
+import gallery4 from "../../assets/karudan.png";
 import gallery5 from "../../assets/lingam.png";
 import gallery6 from "../../assets/murugan1.png";
 

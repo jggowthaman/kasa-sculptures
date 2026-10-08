@@ -42,7 +42,7 @@ sm:text-5xl
 md:text-6xl
 lg:text-7xl
 xl:text-7xl
-2xl:text-8xl font-bold leading-tight text-white"
+2xl:text-5xl font-bold leading-tight text-white"
           >
             Crafting <span className="text-[#D4AF37]">Divine</span> Stone
             Sculptures With Tradition & Excellence

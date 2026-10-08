@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import {
   HiOutlineOfficeBuilding,
-  HiOutlineHome,
-  HiOutlineSparkles,
+
+  
   HiOutlineGlobeAlt,
 } from "react-icons/hi";
 
-import templeImg from "../../assets/img2.jpg";
+import templeImg from "../../assets/t14.jpeg";
 
 const features = [
   {
@@ -14,16 +14,8 @@ const features = [
     title: "Temple Construction",
     desc: "Complete traditional temple construction using authentic South Indian architectural principles.",
   },
-  {
-    icon: <HiOutlineHome />,
-    title: "Mandapam & Gopuram",
-    desc: "Beautifully handcrafted mandapams, gopurams, sanctums, and stone pillars.",
-  },
-  {
-    icon: <HiOutlineSparkles />,
-    title: "Heritage Restoration",
-    desc: "Restoring ancient temples and damaged sculptures while preserving their original beauty.",
-  },
+
+
   {
     icon: <HiOutlineGlobeAlt />,
     title: "International Projects",

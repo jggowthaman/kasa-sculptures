@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import service1 from "../../assets/gods.png";
 import service2 from "../../assets/temple1.png";
-import service3 from "../../assets/statue.png";
-// import service4 from "../../assets/img3.jpg";
+import service3 from "../../assets/arts.png";
+
 
 const services = [
   {
